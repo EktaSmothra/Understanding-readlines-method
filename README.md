@@ -31,9 +31,26 @@ Here is a beginner code for getting started with readlines function and reading 
           print(line)
     x.close()
 
-## Note: We don't need to close file when using "with" for opening files. "with" creates a context manager and automatically closes the file when you are done with it. When simply using open, we should close the file at the end. We should also check whether the handler is closed or not by using "file_object.closed" command.
+#### Note: We don't need to close file when using "with" for opening files. "with" creates a context manager and automatically closes the file when you are done with it. When simply using open, we should close the file at the end. We should also check whether the handler is closed or not by using "file_object.closed" command.
 
-I will add more better real use case programs for this function soon. So do keep checking the upgradations in this repository.
+## Using readlines function in try-catch and checking whether the file contains any content or not using python
+
+Here i have written the following code to read contents of a file and check whether the file contains any content or is empty. This code also uses os.stat(). I will explain its function through code. So, lets dive in:
+
+    import os                           #module for using os dependent functionality
+    get_file= input("Enter name of the file that you want to print: ")
+    try:
+        with open(get_file,'r',encoding="utf-8") as f:          #opening a file
+            print("Name of the file is: ",f.name)               #f.name is used for printing name.
+            a = f.readlines()                                   #reading all the lines in the file 
+        if os.stat(get_file).st_size > 0:                       #os.stat .st_size is used for checking the size of file.
+            print("Checking into the contents of the file: \n", a)
+    except:
+        print("File contains no content. We are really sorry. Nothing can be displayed.")
+
+os.stat().st_size is used for checking the size of file. It will check for number of bytes. Since every character occupies 1 byte space in memory, integer 2 bytes and so on. So, it calculates the no of bytes in the file. If the number of bytes are zero, it concludes that the file is contains nothing. 
+
+Any suggestions and feedbacks are welcomed. 
 
 ## References  
 https://cmdlinetips.com/2011/08/three-ways-to-read-a-text-file-line-by-line-in-python/  
